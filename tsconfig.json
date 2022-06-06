@@ -15,12 +15,19 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "paths":{
-      "@components/*":["./components/*"],
-      "@redux/*":["./redux/*"],
-      "@axios/*":["./api/axios/*"]
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@redux/*": ["./redux/*"],
+      "@axios/*": ["./api/axios/*"],
+      "@interface/*": ["./interface/*"],
+      "@api/*": ["./api/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "context/auth-context.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "context/auth-context.js"
+  ],
   "exclude": ["node_modules"]
 }
