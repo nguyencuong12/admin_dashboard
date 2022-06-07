@@ -45,7 +45,8 @@ const MainContainer = styled.section`
 const Content = styled.section`
   margin-top: 5px;
   position: relative;
-  border: 2px solid #cccccc;
+
+  background: #dae4f1;
   overflow-y: scroll;
   height: 87vh;
   overflow: auto;

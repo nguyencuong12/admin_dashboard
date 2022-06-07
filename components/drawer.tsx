@@ -4,7 +4,7 @@ import { ActionIcon, Button } from "@mantine/core";
 import { useAppDispatch } from "@redux/hook";
 import { changeDrawerState } from "@redux/slice/drawer/drawerSlice";
 import { Home, BorderAll, SquareX, Logout, UserCircle, BrandProducthunt } from "tabler-icons-react";
-
+import Link from "next/link";
 interface propsType {
   open: boolean;
   title?: string;
@@ -68,18 +68,27 @@ const Drawer = (props: propsType) => {
         </div>
       </Header>
       <Center>
-        <Button component="a" href="/" color="cyan" fullWidth={true} leftIcon={<Home size={14} />} style={{ marginBottom: "10px" }} variant="outline">
-          Trang chủ
-        </Button>
-        <Button component="a" href="/products" color="cyan" fullWidth={true} leftIcon={<BrandProducthunt size={14} />} style={{ marginBottom: "10px" }} variant="outline">
-          Quản lý sản phẩm
-        </Button>
-        <Button color="cyan" fullWidth={true} leftIcon={<UserCircle size={14} />} style={{ marginBottom: "10px" }} variant="outline">
-          Danh sách khách hàng
-        </Button>
-        <Button color="cyan" fullWidth={true} leftIcon={<BorderAll size={14} />} style={{ marginBottom: "10px" }} variant="outline">
-          Quản lý đơn hàng
-        </Button>
+        <Link href="/">
+          <Button color="cyan" fullWidth={true} leftIcon={<Home size={14} />} style={{ marginBottom: "10px" }} variant="outline">
+            Trang chủ
+          </Button>
+        </Link>
+        <Link href="/products">
+          <Button color="cyan" fullWidth={true} leftIcon={<BrandProducthunt size={14} />} style={{ marginBottom: "10px" }} variant="outline">
+            Quản lý sản phẩm
+          </Button>
+        </Link>
+        <Link href="/guest">
+          <Button color="cyan" fullWidth={true} leftIcon={<UserCircle size={14} />} style={{ marginBottom: "10px" }} variant="outline">
+            Danh sách khách hàng
+          </Button>
+        </Link>
+        <Link href="/orders">
+          <Button color="cyan" fullWidth={true} leftIcon={<BorderAll size={14} />} style={{ marginBottom: "10px" }} variant="outline">
+            Quản lý đơn hàng
+          </Button>
+        </Link>
+
         <Button
           color="cyan"
           fullWidth={true}

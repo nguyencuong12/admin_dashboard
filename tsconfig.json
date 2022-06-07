@@ -20,7 +20,8 @@
       "@redux/*": ["./redux/*"],
       "@axios/*": ["./api/axios/*"],
       "@interface/*": ["./interface/*"],
-      "@api/*": ["./api/*"]
+      "@api/*": ["./api/*"],
+      "@utils/*":["./utils/*"]
     }
   },
   "include": [

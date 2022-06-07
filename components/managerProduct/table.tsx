@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Badge, Avatar, Group, Button } from '@mantine/core';
-import ProductInterface from '@interface/product';
-import { ProductAPI } from '@api/products';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Pencil, Trash } from 'tabler-icons-react';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Badge, Avatar, Group, Button } from "@mantine/core";
+import ProductInterface from "@interface/product";
+import { ProductAPI } from "@api/products";
+import Link from "next/link";
+import Image from "next/image";
+import { Pencil, Trash } from "tabler-icons-react";
+import { AlertObject } from "@utils/alert";
+import PaginationComponent from "@components/pagination";
 
 const TableWrapper = styled.table`
   width: 100%;
@@ -69,50 +71,56 @@ const TableWrapper = styled.table`
     /* STYLES HERE */
   }
 `;
-const ProductTableManager = () => {
-  const [products, setProducts] = useState<ProductInterface[] | []>([]);
-  const _getListProductFromResponse = async (page: number) => {
-    const response = await ProductAPI._getListProduct(page);
-    console.log('response', response);
-    setProducts(response.data.products.product);
-    // console.log('response', response.data.products.product);
-  };
-  useEffect(() => {
-    _getListProductFromResponse(1);
-  }, []);
+interface propsType {
+  products: ProductInterface[];
+  callbackRemoveProduct: Function;
+}
+const ProductTableManager = (props: propsType) => {
+  const { products, callbackRemoveProduct } = props;
+
+  // const [products, setProducts] = useState<ProductInterface[] | []>([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const _getListProductFromResponse = async (page: number) => {
+  //   const response = await ProductAPI._getListProduct(page);
+  //   setProducts(response.data.products.product);
+  //   // console.log('response', response.data.products.product);
+  // };
+  // useEffect(() => {
+  //   _getListProductFromResponse(currentPage);
+  // }, []);
 
   const renderRow = () => {
-    return products.map(instance => {
+    return products.map((instance) => {
       return (
         <tr key={instance._id}>
           <td data-label="Sản Phẩm">{instance.title}</td>
           <td data-label="Hình Ảnh">
-            {/* <Image
-              src={instance.image!.toString()}
-              height={80}
-              width={80}
-              objectFit={'contain'}
-            ></Image> */}
+            <Image src={instance.image!.toString()} height={80} width={80} objectFit={"contain"}></Image>
           </td>
           <td data-label="Giá Tiền">{instance.price}</td>
           <td data-label="Thao Tác">
-            <Group position="right" direction="row" noWrap>
+            <Group position="center" direction="row" noWrap>
               <Link href={`product/${instance._id}`}>
-                <Button
-                  size={'xs'}
-                  variant="outline"
-                  leftIcon={<Pencil></Pencil>}
-                >
+                <Button size={"xs"} variant="outline" leftIcon={<Pencil></Pencil>}>
                   Chỉnh Sửa
                 </Button>
               </Link>
 
               <Button
-                size={'xs'}
+                size={"xs"}
                 variant="outline"
-                color={'red'}
+                color={"red"}
                 leftIcon={<Trash></Trash>}
-                onClick={() => {
+                onClick={async () => {
+                  callbackRemoveProduct(instance._id);
+                  // AlertObject.delete("Bạn muốn xóa sản phẩm này ? ").then(async (value) => {
+                  //   if (value === true) {
+                  //     const response = await ProductAPI._deleteProductByID(instance._id!);
+                  //     if (response) {
+                  //       await _getListProductFromResponse(currentPage);
+                  //     }
+                  //   }
+                  // });
                   // onHandleDeleteItem(instance._id!);
                 }}
               >
