@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Pencil, Trash } from "tabler-icons-react";
 import { AlertObject } from "@utils/alert";
 import PaginationComponent from "@components/pagination";
+import Router from "next/router";
 
 const TableWrapper = styled.table`
   width: 100%;
@@ -100,11 +101,18 @@ const ProductTableManager = (props: propsType) => {
           <td data-label="Giá Tiền">{instance.price}</td>
           <td data-label="Thao Tác">
             <Group position="center" direction="row" noWrap>
-              <Link href={`product/${instance._id}`}>
-                <Button size={"xs"} variant="outline" leftIcon={<Pencil></Pencil>}>
-                  Chỉnh Sửa
-                </Button>
-              </Link>
+              {/* <Link href={`product/${instance._id}`}> */}
+              <Button
+                size={"xs"}
+                variant="outline"
+                leftIcon={<Pencil></Pencil>}
+                onClick={() => {
+                  Router.push({ pathname: `/product/${instance._id}` });
+                }}
+              >
+                Chỉnh Sửa
+              </Button>
+              {/* </Link> */}
 
               <Button
                 size={"xs"}
